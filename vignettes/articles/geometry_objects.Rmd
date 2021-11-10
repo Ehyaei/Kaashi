@@ -1,0 +1,163 @@
+---
+title: "Geometry Objects"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(sf)
+library(ggplot2)
+library(dplyr)
+```
+
+# Geometry Creation
+
+## Points
+
+```{r}
+pt <- st_point(c(0,0))
+loc <- matrix(rnorm(20), ncol = 2)
+pts <-  st_multipoint(loc)
+plot(pts,col = "blue", pch = 16)
+plot(pt,col = "red", pch = 16, add = TRUE)
+```
+
+## Lines
+
+```{r}
+pts <- rbind(c(-1,-1),c(1,1))
+ln <- st_linestring(pts)
+plot(ln,col = "blue", pch = 16)
+pts = matrix(rnorm(10), ncol = 2)
+lns = st_linestring(pts)
+plot(lns,col = "blue", pch = 16)
+pts1 = matrix(rnorm(10), ncol = 2)
+pts2 = matrix(rnorm(10), ncol = 2)
+lns = st_multilinestring(list(pts1, pts2))
+plot(lns)
+```
+
+## Polygons
+
+```{r}
+box1 = rbind(c(-1,-1), c(1,-1), c(1,1), c(-1,1), c(-1,-1))
+box2 = rbind(c(-1.5,0), c(0,1.5), c(1.5,0), c(0,-1.5), c(-1.5,0))
+
+pl = st_polygon(list(box1, box2))
+plot(pl)
+pls = st_multipolygon(list(list(box1), list(box2)))
+plot(pls)
+```
+
+## Circle
+
+```{r}
+circle <- st_buffer(st_point(c(0,0)),1)
+plot(circle)
+```
+
+
+## Geometry Collections
+
+```{r}
+gc <- st_geometrycollection(list(pt, ln, lns))
+plot(gc)
+```
+
+## SF Objects
+
+```{r}
+sfc <- st_sfc(pt, ln, lns)
+sf <- st_sf(
+  shape = c("point","line","multiline"),
+  geom = sfc
+  ) 
+plot(sf)
+ggplot()+
+  geom_sf(data = sf)+
+  theme_bw()
+```
+
+```{r}
+st_box1 = st_polygon(list(box1))
+st_box2 = st_polygon(list(box2))
+
+sf <- tibble::tribble(
+  ~shape, ~geometry,
+  "box1", st_box1,
+  "box2", st_box2,
+  ) %>%
+  st_as_sf()
+plot(sf)
+```
+
+# Geometric Operations
+
+
+## Intersection Lines
+
+```{r}
+l1 <- st_linestring(box1)
+l2 <- st_linestring(box2)
+pnts <- st_intersection(l1, l2)
+
+plot(l2)
+plot(l1, add = T)
+plot(pnts, add = T, col = "red", pch = 21)
+```
+
+## Conver Hull
+
+Makes a hull around the multilinestring and turns into a polygon.
+
+```{r}
+ml_sf = st_sf(geom = st_sfc(st_multilinestring(list(box1, box2)))) 
+st_ch = st_convex_hull(ml_sf)
+plot(st_ch,col = "red")
+plot(ml_sf, add = T, col = "yellow")
+```
+
+## Extract Bordering Points
+
+Extracts the bordering points a boundary around the multilinestring and turns into a polygon.
+
+```{r}
+st_bd <- st_boundary(st_ch)
+plot(st_ch, col = "yellow")
+plot(st_cast(st_bd,"POINT"),col = "red", add = T)
+```
+
+## Union
+
+```{r}
+pl1 = st_polygon(list(box1))
+pl2 = st_polygon(list(box2))
+plot(st_union(pl1, pl2), col = "lightblue", main = "Union")
+```
+
+## Intersection
+
+```{r}
+plot(st_intersection(pl1, pl2),col = "lightblue", main = "Intersection")
+```
+
+```{r}
+plot(st_difference(pl1, pl2),col = "lightblue", main = "Difference")
+```
+
+```{r}
+plot(st_sym_difference(pl1, pl2),col = "lightblue", main = "Symmetric Difference")
+```
+
+
+```{r}
+box = c(xmin = -1.2, ymin = -1.2, xmax = 1.2, ymax = 1.2)
+plot(st_crop(sf, box),col = "lightblue", main = "Crop")
+```
+
+
