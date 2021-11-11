@@ -1,0 +1,41 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# Kaashi
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of Kaashi is to ...
+
+## Installation
+
+You can install the development version of Kaashi from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ehyaei/kaashi")
+```
+
+## How Create Kashi
+
+```{r}
+library(Kaashi)
+box = rbind(c(-1,-1), c(1,-1), c(1,1), c(-1,1), c(-1,-1))
+
+box_polygon = st_polygon(list(box))
+plot(box_polygon)
+```
+

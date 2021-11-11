@@ -3,10 +3,7 @@ title: "Geometry Objects"
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+source("manuscript/global.R")
 ```
 
 ```{r setup}
@@ -23,8 +20,8 @@ library(dplyr)
 pt <- st_point(c(0,0))
 loc <- matrix(rnorm(20), ncol = 2)
 pts <-  st_multipoint(loc)
-plot(pts,col = "blue", pch = 16)
-plot(pt,col = "red", pch = 16, add = TRUE)
+plot(pts,col = "lightblue", pch = 16)
+plot(pt,col = "gold", pch = 16, add = TRUE)
 ```
 
 ## Lines
@@ -32,10 +29,10 @@ plot(pt,col = "red", pch = 16, add = TRUE)
 ```{r}
 pts <- rbind(c(-1,-1),c(1,1))
 ln <- st_linestring(pts)
-plot(ln,col = "blue", pch = 16)
+plot(ln,col = "lightblue", pch = 16)
 pts = matrix(rnorm(10), ncol = 2)
 lns = st_linestring(pts)
-plot(lns,col = "blue", pch = 16)
+plot(lns,col = "lightblue", pch = 16)
 pts1 = matrix(rnorm(10), ncol = 2)
 pts2 = matrix(rnorm(10), ncol = 2)
 lns = st_multilinestring(list(pts1, pts2))
@@ -118,8 +115,8 @@ Makes a hull around the multilinestring and turns into a polygon.
 ```{r}
 ml_sf = st_sf(geom = st_sfc(st_multilinestring(list(box1, box2)))) 
 st_ch = st_convex_hull(ml_sf)
-plot(st_ch,col = "red")
-plot(ml_sf, add = T, col = "yellow")
+plot(st_ch,col = "lightblue")
+plot(ml_sf, add = T, col = "gold")
 ```
 
 ## Extract Bordering Points
@@ -128,7 +125,7 @@ Extracts the bordering points a boundary around the multilinestring and turns in
 
 ```{r}
 st_bd <- st_boundary(st_ch)
-plot(st_ch, col = "yellow")
+plot(st_ch, col = "lightblue")
 plot(st_cast(st_bd,"POINT"),col = "red", add = T)
 ```
 
@@ -137,7 +134,8 @@ plot(st_cast(st_bd,"POINT"),col = "red", add = T)
 ```{r}
 pl1 = st_polygon(list(box1))
 pl2 = st_polygon(list(box2))
-plot(st_union(pl1, pl2), col = "lightblue", main = "Union")
+plun <- st_union(pl1, pl2)
+plot(plun, col = "lightblue", main = "Union")
 ```
 
 ## Intersection
@@ -146,18 +144,61 @@ plot(st_union(pl1, pl2), col = "lightblue", main = "Union")
 plot(st_intersection(pl1, pl2),col = "lightblue", main = "Intersection")
 ```
 
-```{r}
-plot(st_difference(pl1, pl2),col = "lightblue", main = "Difference")
-```
+## Difference
 
 ```{r}
-plot(st_sym_difference(pl1, pl2),col = "lightblue", main = "Symmetric Difference")
+pldif <- st_difference(pl1, pl2)
+plot(pldif,col = "lightblue", main = "Difference")
 ```
 
+## Symmetric Difference
+
+```{r}
+symDif <- st_sym_difference(pl1, pl2)
+plot(symDif,col = "lightblue", main = "Symmetric Difference")
+```
+
+## Crop
 
 ```{r}
 box = c(xmin = -1.2, ymin = -1.2, xmax = 1.2, ymax = 1.2)
 plot(st_crop(sf, box),col = "lightblue", main = "Crop")
 ```
 
+## contains
+
+```{r}
+pl3 = pl2*0.5 + 0.2
+st_contains(pl2,pl3)
+plot(pl2, col = "lightblue")
+plot(pl3, add = T,col = "gold")
+```
+
+```{r}
+np <- st_nearest_points(pl3,pldif)
+plot(pldif,col = "lightblue")
+plot(pl3, add = T,col = "gold")
+plot(np, add = T,col = "red")
+st_distance(pl3,pldif)
+```
+
+```{r}
+plbuf = st_buffer(plun,0.2)
+plot(plbuf, col = "lightblue")
+plot(plun, add = T,col = "gold")
+```
+```{r}
+plbd <- st_boundary(plun)
+plot(plbd, col = "lightblue",lwd = 20)
+plot(plun, add = T,col = "gold")
+```
+
+
+```{r}
+rot = function(a) matrix(c(cos(a), sin(a), -sin(a), cos(a)), 2, 2)
+cntrd = st_centroid(plun)
+plrot = (plun - cntrd) * rot(pi/6) + cntrd
+plot(plun, border = 'lightblue')
+plot(plrot, add = TRUE,border = "gold")
+```
 
