@@ -13,8 +13,7 @@ Imports:
     sf,
     sp,
     ggplot2,
-    dplyr,
-    magrittr
+    dplyr
 Suggests: 
     rmarkdown
 RoxygenNote: 7.1.2
