@@ -16,7 +16,7 @@ kaashi <- function(tarh, n, shift = 2){
       } else{
         tiling = rbind(
           tiling,
-          dplyr::mutate(tarh,x = x+c(i*shift,j*shift))
+          dplyr::mutate(tarh,geometry = geometry+c(i*shift,j*shift))
         )
       }
     }
