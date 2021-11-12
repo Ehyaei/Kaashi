@@ -33,9 +33,6 @@ devtools::install_github("ehyaei/kaashi")
 
 ```{r}
 library(Kaashi)
-box = rbind(c(-1,-1), c(1,-1), c(1,1), c(-1,1), c(-1,-1))
-
-box_polygon = st_polygon(list(box))
-plot(box_polygon)
+plot(kaashi(tarh(theta = 45, delta = 0.5), n = 5))
 ```
 
