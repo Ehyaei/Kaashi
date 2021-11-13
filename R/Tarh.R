@@ -20,41 +20,58 @@ tarh <- function(
                  ){
   suppressMessages(library(dplyr)) # TODO remove package
   suppressMessages(library(sf))
+
+  # Create Polygons
   pl_box = st_polygon(list(box)) %>% st_sfc()
   lns_box = st_linestring(box) %>% st_sfc()
-  bbox = c(xmin = -1, ymin = -1, xmax = 1, ymax = 1)
-  d = 2*sqrt(2)
 
+  # Compute Center
+  center = pl_box %>% st_centroid() %>% unlist()
+
+  # Compute Diameter
+  d = pl_box %>%
+    st_cast('MULTIPOINT') %>%
+    st_cast('POINT') %>%
+    st_distance() %>%
+    max()
+
+
+  # Create Basis Lines
   ln1 <- st_linestring(rbind(
     c(delta,0) + start_points,
     c(delta - d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + start_points
   )) %>% st_sfc %>%
-    st_crop(bbox)
+    st_intersection(pl_box)
   ln2 <- st_linestring(rbind(
     c(-delta,0) + start_points,
     c(-delta + d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + start_points
   ))%>% st_sfc %>%
-    st_crop(bbox)
+    st_intersection(pl_box)
 
   shapes = rbind(
     ln1 %>% st_as_sf, ln2 %>% st_as_sf)
 
+  # Rotate Basis Lines
   for(i in 1:(n-1)) {
-    shapes = rbind(shapes, (ln1*rot(-i*360/n)) %>% st_as_sf)
-    shapes = rbind(shapes, (ln2*rot(-i*360/n)) %>% st_as_sf)
+    shapes = rbind(shapes, ((ln1-center)*rot(-i*360/n)+center) %>% st_as_sf)
+    shapes = rbind(shapes, ((ln2-center)*rot(-i*360/n)+center) %>% st_as_sf)
   }
 
-
+  # Add Box
   if(drawBox){
     shapes = rbind(shapes, lns_box) %>% unique()
   }
+
+  # Last Crop
+  shapes = shapes %>% st_intersection(pl_box)
+
+  # Create SF Objects
   sfc <- shapes$x
   shape_frame <- st_sf(
     name = paste0("R",stringr::str_pad(1:length(sfc),width = 2,side = "left",pad = "0")),
     geometry = sfc
   )
   return(shape_frame)
-
 }
 
 
@@ -78,11 +95,23 @@ tarhe_rangi <- function(
 ){
   suppressMessages(library(dplyr)) # TODO remove package
   suppressMessages(library(sf))
+
+
+  # Create Polygons
   pl_box = st_polygon(list(box)) %>% st_sfc()
 
-  bbox = c(xmin = -1, ymin = -1, xmax = 1, ymax = 1)
-  d = 2*sqrt(2)
+  # Compute Center
+  center = pl_box %>% st_centroid() %>% unlist()
 
+  # Compute Diameter
+  d = pl_box %>%
+    st_cast('MULTIPOINT') %>%
+    st_cast('POINT') %>%
+    st_distance() %>%
+    max()
+
+
+  # Create Basis Lines
   line_list = list()
   ln1 <- st_linestring(rbind(
     c(delta,0) + start_points,
@@ -95,22 +124,27 @@ tarhe_rangi <- function(
   ))
   line_list[[2]] = ln2
 
+  # Rotate Basis Lines
   for(i in 2*(1:(n-1))) {
-    line_list[[i+1]] = ln1*rot(-i*360/(2*n))
-    line_list[[i+2]] = ln2*rot(-i*360/(2*n))
+    line_list[[i+1]] = (ln1-center)*rot(-i*360/(2*n))+center
+    line_list[[i+2]] = (ln2-center)*rot(-i*360/(2*n))+center
   }
-shape = pl_box
+  # Create Shape
+  shapes = pl_box
   for (i in 1:length(line_list)) {
-    shape = st_difference(shape, st_buffer(line_list[[i]],dist = dist))
+    shapes = st_difference(shapes, st_buffer(line_list[[i]],dist = dist))
   }
 
-sfc = st_cast(shape,"POLYGON")
-shape_frame <- st_sf(
+# Last Crop
+shapes = shapes %>% st_intersection(pl_box)
+
+sfc = st_cast(shapes,"POLYGON")
+shapes_frame <- st_sf(
   name = paste0("R",stringr::str_pad(1:length(sfc),width = 2,side = "left",pad = "0")),
   area = round(st_area(sfc),3),
   geometry = sfc
 )
-    return(shape_frame)
+    return(shapes_frame)
 }
 
 

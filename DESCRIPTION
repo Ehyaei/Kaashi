@@ -1,12 +1,15 @@
 Package: Kaashi
 Type: Package
-Title: What the Package Does (Title Case)
+Title: The Package to create Islamic Pattern
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: 
+    person(given = "Ahmad",
+           family = "Ehyaei",
+           role = c("aut", "cre"),
+           email = "ahmad.ehyaei@gmail.com")
+Description: The Kasshi (Persian equivalent of tile) contains functions for 
+    generating Islamic patterns, tiling, and coloring.
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Imports: 
@@ -15,5 +18,9 @@ Imports:
     ggplot2,
     dplyr
 Suggests: 
-    rmarkdown
+    rmarkdown,
+    spelling
 RoxygenNote: 7.1.2
+Language: en-US
+Depends: 
+    R (>= 3.4)
