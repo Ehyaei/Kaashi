@@ -19,12 +19,12 @@ knitr::opts_chunk$set(
 
 # Kaashi (Tile)
 
-```{r, echo = FALSE, results='asis', message=FALSE,eval=FALSE}
+```{r, echo = FALSE, results='asis', message=FALSE}
 cat(
-  badger::badge_github_actions("Ehyaei/RTLNotes"),
-  badger::badge_devel("Ehyaei/RTLNotes", "orange"),
+  badger::badge_github_actions("Ehyaei/Kaashi"),
+  badger::badge_devel("Ehyaei/Kaashi", "orange"),
   badger::badge_lifecycle("experimental"),
-  badger::badge_last_commit("Ehyaei/RTLNotes")
+  badger::badge_last_commit("Ehyaei/Kaashi")
 )
 ```
 
