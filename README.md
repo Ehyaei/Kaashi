@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<a href={https://github.com/Ehyaei/Kaashi}><img src="man/figures/README-kashi_rangi_2-1.svg" alt="Kaashi logo" align="right" width="160" style="padding: 0 15px; float: right;"/>
+<a href={https://github.com/Ehyaei/Kaashi}><img src="man/figures/kaashi.svg" alt="Kaashi logo" align="right" width="160" style="padding: 0 15px; float: right;"/>
 
 # Kaashi (Tile)
 
@@ -66,16 +66,16 @@ tarh_hex = tarh(theta = 45, n = 6, delta = 0.2, start_points = c(0,0),
 ggplot(tarh_hex)+ geom_sf() + theme_void()
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.svg" width="100%" />
+<img src="man/figures/README-hexagonal_pattern-1.svg" width="100%" />
 
 ``` r
-  
-tarh_hex = tarhe_rangi(theta = 45, n = 6, delta = 0.2, start_points = c(0,0), box = hex_box)
-kaashi_hex = kaashi(tarh = tarh_hex,n = 3,d = 6, box = hex_box)
+tarh_hex = tarhe_rangi(theta = 60, n = 6, delta = 0.2, 
+                       start_points = c(0,0), box = hex_box,dist = 0.05)
+kaashi_hex = kaashi(tarh = tarh_hex,n = 2,d = 6, box = hex_box)
 ggplot(kaashi_hex)+
-  geom_sf(aes(fill = as.factor(area)),color = "white",size= 0.001) + 
-  scale_fill_manual(values =  c("#FFAD00","#FFAD00","#FFAD00","#BF5700","#002D7B","#007EA1"))+
+  geom_sf(aes(fill = as.factor(area)),color = "white",size= 0.1) + 
+  scale_fill_manual(values =  c("#FFAD00","#FFAD00","#007EA1","#002D7B"))+
   theme_void()+theme(legend.position = "none")
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-2.svg" width="100%" />
+<img src="man/figures/README-hexagonal_kaashi-1.svg" width="100%" />
