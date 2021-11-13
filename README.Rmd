@@ -21,7 +21,6 @@ knitr::opts_chunk$set(
 
 ```{r, echo = FALSE, results='asis', message=FALSE}
 cat(
-  badger::badge_github_actions("Ehyaei/Kaashi"),
   badger::badge_devel("Ehyaei/Kaashi", "orange"),
   badger::badge_lifecycle("experimental"),
   badger::badge_last_commit("Ehyaei/Kaashi")

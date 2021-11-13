@@ -5,8 +5,6 @@
 
 # Kaashi (Tile)
 
-[![R build
-status](https://github.com/Ehyaei/Kaashi/workflows/R-CMD-check/badge.svg)](https://github.com/Ehyaei/Kaashi/actions)
 [![](https://img.shields.io/badge/devel%20version-0.1.0-orange.svg)](https://github.com/Ehyaei/Kaashi)
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![](https://img.shields.io/github/last-commit/Ehyaei/Kaashi.svg)](https://github.com/Ehyaei/Kaashi/commits/main)
