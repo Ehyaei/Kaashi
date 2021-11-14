@@ -8,7 +8,7 @@
 #' @import dplyr
 #' @export
 #' @examples
-kaashi <- function(tarh, n, d = 4,
+tessellation <- function(tarh, n, d = 4,
                    box = rbind(c(-1,-1), c(1,-1), c(1,1), c(-1,1), c(-1,-1))
                      ){
   suppressMessages(library(dplyr)) # TODO remove package
