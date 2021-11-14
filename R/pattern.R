@@ -1,18 +1,25 @@
-#' pattern
+#' Design Tile Pattern
 #'
-#' @param theta
-#' @param delta
-#' @param n
-#' @param start_points
-#' @param drawBox
-#' @param box
+#' @param theta the angle of basis lines in degree between 0 to 90.
+#' @param delta the distance of basis lines between 0 to 1 (it depend on boundary box).
+#' @param n the number of sides of polygon.
+#' @param start_points is one point in boundary box that basis lines are constructed.
+#' @param drawBox to show boundary box set it TRUE.
+#' @param box the polygon that the shape constructed by it.
 #'
 #' @return
 #' @import dplyr
-#' @importFrom  sf st_polygon
-#' @export
+#' @import sf
+#' @export sf object
 #'
 #' @examples
+#' pattern(theta = 45, delta = 0.5, polyLine = T)
+#' pattern(theta = 45, delta = 0.5, dist = 0.05, polyLine = F)
+#' s3 = sqrt(3)
+#' hexagonal = rbind(c(-1,0), c(1,0), c(2,s3), c(1,2*s3), c(-1,2*s3),c(-2,s3),c(-1,0))
+#' pattern(theta = 45, n = 6, delta = 0.2, start_points = c(0,0),
+#'                 box = hexagonal, drawBox = T, polyLine = T)
+#'
 pattern <- function(
   theta = 30,
   delta = 0.2,
@@ -65,8 +72,8 @@ pattern <- function(
 
     # Rotate Basis Lines
     for(i in 1:(n-1)) {
-      shapes = rbind(shapes, ((ln1-center)*rot(-i*360/n)+center) %>% st_as_sf)
-      shapes = rbind(shapes, ((ln2-center)*rot(-i*360/n)+center) %>% st_as_sf)
+      shapes = rbind(shapes, ((ln1-center)*rotation(-i*360/n)+center) %>% st_as_sf)
+      shapes = rbind(shapes, ((ln2-center)*rotation(-i*360/n)+center) %>% st_as_sf)
     }
 
     # Add Box
@@ -107,8 +114,8 @@ pattern <- function(
 
     # Rotate Basis Lines
     for(i in 2*(1:(n-1))) {
-      line_list[[i+1]] = (ln1-center)*rot(-i*360/(2*n))+center
-      line_list[[i+2]] = (ln2-center)*rot(-i*360/(2*n))+center
+      line_list[[i+1]] = (ln1-center)*rotation(-i*360/(2*n))+center
+      line_list[[i+2]] = (ln2-center)*rotation(-i*360/(2*n))+center
     }
     # Create Shape
     shapes = pl_box

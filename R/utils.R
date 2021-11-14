@@ -1,1 +1,11 @@
-rot = function(a) matrix(c(cos(a*pi/180), sin(a*pi/180), -sin(a*pi/180), cos(a*pi/180)), 2, 2)
+#' Rotation function
+#'
+#' @param a angle of rotation in degree
+#'
+#' @return matrix of rotation
+#'
+#' @examples
+#' rotation(45)
+rotation = function(theta){
+  matrix(c(cos(theta*pi/180), sin(theta*pi/180), -sin(theta*pi/180), cos(theta*pi/180)), 2, 2)
+}
