@@ -41,11 +41,10 @@ ggplot(kas) + geom_sf() + theme_void()
 <img src="man/figures/README-kashi-1.svg" width="100%" />
 
 ``` r
-library(pals)
-kasr <- kaashi(tarhe_rangi(theta = 45, delta = 0.5), n = 5)
+kasr <- kaashi(tarhe_rangi(theta = 45, delta = 0.5,dist = 0.05), n = 5)
 ggplot(kasr) + 
-  geom_sf(aes(fill = area),color = "white") + 
-  scale_fill_gradientn(colours = rev(pals::parula()))+
+  geom_sf(aes(fill = area),color = "white",size = 0.01) + 
+  scale_fill_gradientn(colours = c("#EF821D","#2eb6c2","#0C3263"))+
   theme_void()+theme(legend.position = "none")
 ```
 
