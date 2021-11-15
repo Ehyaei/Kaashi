@@ -3,6 +3,7 @@
 #' @param theta the angle of basis lines in degree between 0 to 90.
 #' @param delta the distance of basis lines between 0 to 1 (it depend on boundary box).
 #' @param n the number of sides of polygon.
+#' @param dist is the size of interior lines.
 #' @param start_points is one point in boundary box that basis lines are constructed.
 #' @param drawBox to show boundary box set it TRUE.
 #' @param box the polygon that the shape constructed by it.

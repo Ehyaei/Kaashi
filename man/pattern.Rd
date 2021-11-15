@@ -22,6 +22,8 @@ pattern(
 
 \item{n}{the number of sides of polygon.}
 
+\item{dist}{is the size of interior lines.}
+
 \item{start_points}{is one point in boundary box that basis lines are constructed.}
 
 \item{drawBox}{to show boundary box set it TRUE.}
