@@ -86,3 +86,20 @@ tilePlotter(tiling,tileColor = c("#FFAD00","#FFAD00","#007EA1","#002D7B"),
 ```
 
 <img src="man/figures/README-hexagonal_tiling-1.svg" width="100%" />
+
+``` r
+box = rbind(c(-1,0), c(1,0), c(0,sqrt(3)),c(-1,0))
+tile <- pattern(25,0.5,n = 3, start_points = c(0,0),box = box, polyLine = T,drawBox = T)
+tilePlotter(tile)
+```
+
+<img src="man/figures/README-riangle_tile-1.svg" width="100%" />
+
+``` r
+tile <- pattern(25,0.5,n = 3, start_points = c(0,0),box = box, polyLine = F,dist = 0.01)
+tiling <- tessellation(tile, n = 2,box = box,type = "3-6")
+tilePlotter(tiling,tileColor = c("#FFAD00","#FFAD00","#FFAD00","#007EA1","#002D7B"),
+            borderSize = 0.001)
+```
+
+<img src="man/figures/README-triangle_tiling-1.svg" width="100%" />
