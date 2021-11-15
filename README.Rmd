@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 
 <a href={https://github.com/Ehyaei/Kaashi}><img src="man/figures/kaashi.svg" alt="tiling logo" align="right" width="160" style="padding: 0 15px; float: right;"/>
 
-
 # Kaashi (Tile)
 
 ```{r, echo = FALSE, results='asis', message=FALSE}
@@ -32,6 +31,67 @@ The art of tiling has long been used to decorate homes and holy places in Iran. 
 <a><img src="man/figures/lotfollah.png" align="right" width="100%" style="padding: 0 15px; float: right;"/>
 
 The purpose of this package is to create Islamic pattern using R functions.
+To generate Islamic patterns, we employ the Hankin method, as described in Craig S. Kaplan's paper Islamic Star Patterns from Polygons in Contact. This paper investigates geometric vocabulary for designing star shape patterns.
+
+<center>
+<a><img src="man/figures/Hankin.png" align="right" width="100%" style="padding: 0 15px; float: right;"/>
+</center>
+
+In the first step of Hankin’s method, a pair of rays is associated with every
+contact position on every tile. A single contact position gets its two rays, 
+Each of which forms the contact angle $\theta$ with the edge and ​separate the 
+ray origins by distance $\delta$.
+
+```{r tile, fig.height=3}
+library(Kaashi)
+library(ggplot2)
+tile <- pattern(theta = 45, delta = 0.5, polyLine = T, drawBox = T)
+tilePlotter(tile)
+```
+
+By repeating the patterns designs, larger designs can be produced on the page.
+
+```{r tiling, fig.height=3}
+tiling <- tessellation(tile, n = 5)
+tilePlotter(tiling)
+```
+
+`pattern` function implements Hankin’s method. The output of the function is sf class that can be polylines or polygons. In polygons case, sf data.frame have two fields area and name.
+You can set fill parameter area or name for coloring shape. 
+
+```{r}
+tile <- pattern(theta = 45, delta = 0.5, polyLine = F)
+head(tile)
+```
+
+To plot patterns use `tilePlotter` function. 
+
+```{r tiling_45_0.5, fig.height=3}
+tile <- pattern(theta = 45, delta = 0.5, dist = 0.05, polyLine = F)
+tiling <- tessellation(tile, n = 5)
+tilePlotter(tiling,tileColor = c("#FFAD00","#002D7B","#007EA1"),borderSize = 0.01)
+```
+
+Below, examples of triangale, square, and hexagonal tiling can be found.
+
+<table width="100%" border="0">
+  <tr>    
+  <td>
+  <img src="man/figures/triangle.svg" align="left" />
+  </a>
+  </td>
+  <td>
+  <img src="man/figures/square.svg" align="center"/>
+  </a>
+  </td>
+  </tr>
+  <tr>
+  <td>
+  <img src="man/figures/hexagonal.svg"  align="right"/>
+  </a>
+  </td>
+  </tr>
+</table>
 
 ## Installation
 
@@ -41,61 +101,3 @@ You can install the development version of Kaashi from [GitHub](https://github.c
 # install.packages("devtools")
 devtools::install_github("ehyaei/Kaashi")
 ```
-
-## How Create Kashi
-
-```{r tile}
-library(Kaashi)
-library(ggplot2)
-# Create Simple Pattern
-tile <- pattern(theta = 45, delta = 0.5, polyLine = T)
-tilePlotter(tile)
-# Tilling page with Pattern
-tiling <- tessellation(tile, n = 5)
-tilePlotter(tiling)
-```
-
-```{r tiling_45_0.5}
-tile <- pattern(theta = 45, delta = 0.5, dist = 0.05, polyLine = F)
-tiling <- tessellation(tile, n = 5)
-tilePlotter(tiling,tileColor = c("#EF821D","#2eb6c2","#0C3263"),borderSize = 0.01)
-```
-
-```{r tiling_30_0.5}
-tile <- pattern(theta = 30, delta = 0.5, polyLine = F)
-tiling <- tessellation(tile, n = 5)
-tilePlotter(tiling,tileColor = c("#FFAD00","#FFAD00","#BF5700","#002D7B","#007EA1"),
-            borderSize = 0.1)
-```
-
-```{r hexagonal_tile}
-# Hexagonal Box
-s3 = sqrt(3)
-hexagonal = rbind(c(-1,0), c(1,0), c(2,s3), c(1,2*s3), c(-1,2*s3),c(-2,s3),c(-1,0))
-tile <- pattern(theta = 45, n = 6, delta = 0.2, start_points = c(0,0),
-                box = hexagonal, drawBox = T, polyLine = T)
-tilePlotter(tile)
-```
-
-```{r hexagonal_tiling}
-tile <- pattern(theta = 60, n = 6, delta = 0.2, 
-                start_points = c(0,0), box = hexagonal, dist = 0.05, polyLine = F)
-tiling <- tessellation(tile,n = 2, type = "6-3", box = hexagonal)
-
-tilePlotter(tiling,tileColor = c("#FFAD00","#FFAD00","#007EA1","#002D7B"),
-            borderSize = 0.1)
-```
-
-```{r riangle_tile}
-box = rbind(c(-1,0), c(1,0), c(0,sqrt(3)),c(-1,0))
-tile <- pattern(25,0.5,n = 3, start_points = c(0,0),box = box, polyLine = T,drawBox = T)
-tilePlotter(tile)
-```
-
-```{r triangle_tiling}
-tile <- pattern(25,0.5,n = 3, start_points = c(0,0),box = box, polyLine = F,dist = 0.01)
-tiling <- tessellation(tile, n = 2,box = box,type = "3-6")
-tilePlotter(tiling,tileColor = c("#FFAD00","#FFAD00","#FFAD00","#007EA1","#002D7B"),
-            borderSize = 0.001)
-```
-
