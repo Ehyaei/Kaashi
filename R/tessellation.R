@@ -38,6 +38,33 @@ tessellation <- function(tile, n, type = "4-4", shift = NULL,
     shift <- st_distance(ln,center) %>% as.vector()
   }
 
+
+############################################################
+#                                                          #
+#                     Triangale tiling                     #
+#                                                          #
+############################################################
+  if(type == "3-6"){
+    cp = unclass(center)
+
+  tiling <- tile
+  for(i in 1:n) {
+
+    vs1 = c(0,-1)*(-1)^(i-1)
+    vs2 = c(cos(pi/6),sin(pi/6))*(-1)^(i-1)
+    vs3 = c(-cos(pi/6),sin(pi/6))*(-1)^(i-1)
+
+    reverseTile <- dplyr::mutate(tiling, geometry = (geometry-cp)*rotation(180)+cp)
+
+    tiling = rbind(
+      tiling,
+      dplyr::mutate(reverseTile, geometry = geometry + 2^(i)*shift  * vs1),
+      dplyr::mutate(reverseTile, geometry = geometry + 2^(i)*shift  * vs2),
+      dplyr::mutate(reverseTile, geometry = geometry + 2^(i)*shift  * vs3)
+    )
+  }
+  }
+
 ############################################################
 #                                                          #
 #                      Square Tiling                       #
@@ -46,8 +73,8 @@ tessellation <- function(tile, n, type = "4-4", shift = NULL,
 
   if(type == "4-4"){
     # Compute Center
-    vectotshift1 = c(0,1)
-    vectotshift2 = c(1,0)
+    vs1 = c(0,1)
+    vs2 = c(1,0)
     for(i in 0:(n-1)) {
       for(j in 0:(n-1)){
         if(i == 0 & j == 0){
@@ -55,7 +82,7 @@ tessellation <- function(tile, n, type = "4-4", shift = NULL,
         } else{
           tiling = rbind(
             tiling,
-            dplyr::mutate(tile,geometry = geometry + 2*(i*shift * vectotshift1 + j*shift*vectotshift2))
+            dplyr::mutate(tile,geometry = geometry + 2*(i*shift * vs1 + j*shift*vs2))
           )
         }
       }
@@ -70,9 +97,9 @@ tessellation <- function(tile, n, type = "4-4", shift = NULL,
 
   if(type == "6-3"){
     # Compute Center
-    vectotshift1 = c(0,-1)
-    vectotshift2 = c(cos(-pi/6),sin(-pi/6))
-    vectotshift3 = c(cos(pi/6),sin(pi/6))
+    vs1 = c(0,-1)
+    vs2 = c(cos(-pi/6),sin(-pi/6))
+    vs3 = c(cos(pi/6),sin(pi/6))
 
     for(i in 0:(n-1)) {
       for(j in 0:(n-1)){
@@ -82,7 +109,7 @@ tessellation <- function(tile, n, type = "4-4", shift = NULL,
           } else{
             tiling = rbind(
               tiling,
-              dplyr::mutate(tile,geometry = geometry + 2*(i*shift * vectotshift1 + j*shift*vectotshift2 + k*shift*vectotshift3)))
+              dplyr::mutate(tile,geometry = geometry + 2*(i*shift * vs1 + j*shift*vs2 + k*shift*vs3)))
         }
         }
       }
