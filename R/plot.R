@@ -33,9 +33,15 @@ tilePlotter <- function(shape, tileColor = NULL, fill = "area", lineColor = "bla
     theme_void()+
     theme(legend.position = "none")
   if("area" %in% colnames(shape)){
-    p = p +
-      geom_sf(aes_string(fill = fill), color = borderColor, size = borderSize)+
-      scale_fill_manual(values = tileColor)
+    if(!is.null(tileColor)){
+      p = p +
+        geom_sf(aes_string(fill = fill), color = borderColor, size = borderSize)+
+        scale_fill_manual(values = tileColor)
+    } else{
+      p = p +
+        geom_sf(color = borderColor, size = borderSize)+
+        scale_fill_manual(values = tileColor)
+    }
   } else {
     p = p + geom_sf(color = lineColor, size = borderSize)
   }

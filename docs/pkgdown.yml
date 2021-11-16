@@ -2,6 +2,7 @@ pandoc: 2.14.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  articles/geometry_objects: geometry_objects.html
-last_built: 2021-11-13T13:32Z
+  articles/motif: motif.html
+  articles/tiling: tiling.html
+last_built: 2021-11-16T21:05Z
 

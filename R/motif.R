@@ -1,12 +1,12 @@
 #' Design Tile Pattern
 #'
+#' @param box the polygon that the shape constructed by it.
+#' @param midpoint is one point in boundary box that basis lines are constructed.
 #' @param theta the angle of basis lines in degree between 0 to 90.
 #' @param delta the distance of basis lines between 0 to 1 (it depend on boundary box).
 #' @param n the number of sides of polygon.
 #' @param dist is the size of interior lines.
-#' @param start_points is one point in boundary box that basis lines are constructed.
 #' @param drawBox to show boundary box set it TRUE.
-#' @param box the polygon that the shape constructed by it.
 #'
 #' @return
 #' @import dplyr
@@ -14,22 +14,22 @@
 #' @export sf object
 #'
 #' @examples
-#' pattern(theta = 45, delta = 0.5, polyLine = T)
-#' pattern(theta = 45, delta = 0.5, dist = 0.05, polyLine = F)
+#' motif(theta = 45, delta = 0.5, polyLine = T)
+#' motif(theta = 45, delta = 0.5, dist = 0.05, polyLine = F)
 #' s3 = sqrt(3)
 #' hexagonal = rbind(c(-1,0), c(1,0), c(2,s3), c(1,2*s3), c(-1,2*s3),c(-2,s3),c(-1,0))
-#' pattern(theta = 45, n = 6, delta = 0.2, start_points = c(0,0),
+#' motif(theta = 45, n = 6, delta = 0.2, midpoint = c(0,0),
 #'                 box = hexagonal, drawBox = T, polyLine = T)
 #'
-pattern <- function(
+motif <- function(
+  box = rbind(c(-1,0), c(1,0), c(1,2), c(-1,2), c(-1,0)),
+  midpoint = c(0,0),
   theta = 30,
   delta = 0.2,
   n = 4,
   dist = 0.001,
-  start_points = c(0,-1),
   polyLine = F,
-  drawBox = FALSE,
-  box = rbind(c(-1,-1), c(1,-1), c(1,1), c(-1,1), c(-1,-1))
+  drawBox = FALSE
                  ){
 
   suppressMessages(library(dplyr)) # TODO remove package
@@ -58,13 +58,13 @@ pattern <- function(
 
     # Create Basis Lines
     ln1 <- st_linestring(rbind(
-      c(delta,0) + start_points,
-      c(delta - d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + start_points
+      c(delta,0) + midpoint,
+      c(delta - d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
     )) %>% st_sfc %>%
       st_intersection(pl_box)
     ln2 <- st_linestring(rbind(
-      c(-delta,0) + start_points,
-      c(-delta + d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + start_points
+      c(-delta,0) + midpoint,
+      c(-delta + d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
     ))%>% st_sfc %>%
       st_intersection(pl_box)
 
@@ -103,13 +103,13 @@ pattern <- function(
     # Create Basis Lines
     line_list = list()
     ln1 <- st_linestring(rbind(
-      c(delta,0) + start_points,
-      c(delta - d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + start_points
+      c(delta,0) + midpoint,
+      c(delta - d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
     ))
     line_list[[1]] = ln1
     ln2 <- st_linestring(rbind(
-      c(-delta,0) + start_points,
-      c(-delta + d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + start_points
+      c(-delta,0) + midpoint,
+      c(-delta + d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
     ))
     line_list[[2]] = ln2
 
