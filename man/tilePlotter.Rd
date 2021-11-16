@@ -36,11 +36,12 @@ plot is used for plot pattern or tessellation outputs. In fact it is ggplot-base
 function that uses geom_sf to plot sf class object.
 }
 \examples{
-tile <- pattern(theta = 45, delta = 0.5, polyLine = T)
+library(ggplot2)
+tile <- motif(theta = 45, delta = 0.5, polyLine = T)
 tilePlotter(tile)
-tiling <- tessellation(tile, n = 5)
+tiling <- tiling(tile, n = 5)
 tilePlotter(tiling)
-tile <- pattern(theta = 45, delta = 0.5, dist = 0.05, polyLine = F)
-tiling <- tessellation(tile, n = 5)
+tile <- motif(theta = 45, delta = 0.5, dist = 0.05, polyLine = F)
+tiling <- tiling(tile, n = 5)
 tilePlotter(tiling,tileColor = c("#EF821D","#2eb6c2","#0C3263"),borderSize = 0.01)
 }

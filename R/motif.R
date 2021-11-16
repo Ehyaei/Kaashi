@@ -14,12 +14,16 @@
 #' @export sf object
 #'
 #' @examples
-#' motif(theta = 45, delta = 0.5, polyLine = T)
-#' motif(theta = 45, delta = 0.5, dist = 0.05, polyLine = F)
+#' library(ggplot2)
+#' tile <- motif(theta = 45, delta = 0.5, polyLine = T)
+#' tilePlotter(tile)
+#' tile <- motif(theta = 45, delta = 0.5, dist = 0.05, polyLine = F)
+#' tilePlotter(tile)
 #' s3 = sqrt(3)
 #' hexagonal = rbind(c(-1,0), c(1,0), c(2,s3), c(1,2*s3), c(-1,2*s3),c(-2,s3),c(-1,0))
-#' motif(theta = 45, n = 6, delta = 0.2, midpoint = c(0,0),
+#' tile <- motif(theta = 45, n = 6, delta = 0.2, midpoint = c(0,0),
 #'                 box = hexagonal, drawBox = T, polyLine = T)
+#' tilePlotter(tile)
 #'
 motif <- function(
   box = rbind(c(-1,0), c(1,0), c(1,2), c(-1,2), c(-1,0)),

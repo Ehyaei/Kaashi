@@ -19,7 +19,7 @@ rotation <- function(theta){
 #'
 #' @examples
 #' regularPolygon(5) %>% plot()
-#' regularPolygon(5,TRUE) %>% plot()
+#' regularPolygon(5,TRUE) %>% tilePlotter()
 regularPolygon <- function(n,sf = F){
   points = list()
   for(i in 1:n){

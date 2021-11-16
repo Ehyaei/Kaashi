@@ -165,97 +165,19 @@ in vertical and horizontal direction tile repeated n times.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='co'># Square Tiling</span></span>
-<span class='r-in'><span class='va'>tile</span> <span class='op'>&lt;-</span> <span class='fu'>pattern</span><span class='op'>(</span>theta <span class='op'>=</span> <span class='fl'>45</span>, delta <span class='op'>=</span> <span class='fl'>0.5</span>, polyLine <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span></span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in pattern(theta = 45, delta = 0.5, polyLine = T):</span> could not find function "pattern"</span>
-<span class='r-in'><span class='fu'>tiling</span><span class='op'>(</span><span class='va'>tile</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in tiling(tile, n = 5):</span> object 'tile' not found</span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='motif.html'>motif</a></span><span class='op'>(</span>theta <span class='op'>=</span> <span class='fl'>45</span>, delta <span class='op'>=</span> <span class='fl'>0.5</span>, polyLine <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tiles</span> <span class='op'>&lt;-</span> <span class='fu'>tiling</span><span class='op'>(</span><span class='va'>tile</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='tilePlotter.html'>tilePlotter</a></span><span class='op'>(</span><span class='va'>tiles</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='tiling-1.png' alt='' width='700' height='433' /></span>
 <span class='r-in'><span class='va'>s3</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span></span>
 <span class='r-in'><span class='co'># Hexagonal Tiling</span></span>
 <span class='r-in'><span class='va'>hexagonal</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>0</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>0</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='va'>s3</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>*</span><span class='va'>s3</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>*</span><span class='va'>s3</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>,<span class='va'>s3</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>tile</span> <span class='op'>&lt;-</span> <span class='fu'>pattern</span><span class='op'>(</span>theta <span class='op'>=</span> <span class='fl'>60</span>, n <span class='op'>=</span> <span class='fl'>6</span>, delta <span class='op'>=</span> <span class='fl'>0.2</span>,</span>
-<span class='r-in'>                start_points <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span>, box <span class='op'>=</span> <span class='va'>hexagonal</span>, dist <span class='op'>=</span> <span class='fl'>0.05</span>, polyLine <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span></span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in pattern(theta = 60, n = 6, delta = 0.2, start_points = c(0, 0),     box = hexagonal, dist = 0.05, polyLine = F):</span> could not find function "pattern"</span>
-<span class='r-in'><span class='fu'>tiling</span><span class='op'>(</span><span class='va'>tile</span>,n <span class='op'>=</span> <span class='fl'>2</span>, type <span class='op'>=</span> <span class='st'>"6-3"</span>, box <span class='op'>=</span> <span class='va'>hexagonal</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> function (tile, n, type = "square", shift = NULL, vector = NULL, </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     box = rbind(c(-1, -1), c(1, -1), c(1, 1), c(-1, 1), c(-1, </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         -1))) </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     suppressMessages(library(dplyr))</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     suppressMessages(library(sf))</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     pl_box = st_polygon(list(box)) %&gt;% st_sfc()</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     center = pl_box %&gt;% st_centroid()</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (is.null(shift)) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         ln &lt;- st_linestring(box[1:2, ])</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         shift &lt;- st_distance(ln, center) %&gt;% as.vector()</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (type == "periodic") {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         for (i in 0:(n - 1)) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             for (j in 0:(n - 1)) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 if (i == 0 &amp; j == 0) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                   tiling &lt;- tile</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                   tiling = rbind(tiling, dplyr::mutate(tile, </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                     geometry = geometry + i * vector[1, ] + j * </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                       vector[2, ]))</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (type == "triangle") {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         cp = unclass(center)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         tiling &lt;- tile</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         for (i in 1:n) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             vs1 = c(0, -1) * (-1)^(i - 1)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             vs2 = c(cos(pi/6), sin(pi/6)) * (-1)^(i - 1)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             vs3 = c(-cos(pi/6), sin(pi/6)) * (-1)^(i - 1)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             reverseTile &lt;- dplyr::mutate(tiling, geometry = (geometry - </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 cp) * rotation(180) + cp)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             tiling = rbind(tiling, dplyr::mutate(reverseTile, </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 geometry = geometry + 2^(i) * shift * vs1), dplyr::mutate(reverseTile, </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 geometry = geometry + 2^(i) * shift * vs2), dplyr::mutate(reverseTile, </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 geometry = geometry + 2^(i) * shift * vs3))</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (type == "square") {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         vs1 = c(0, 1)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         vs2 = c(1, 0)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         for (i in 0:(n - 1)) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             for (j in 0:(n - 1)) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 if (i == 0 &amp; j == 0) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                   tiling &lt;- tile</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                   tiling = rbind(tiling, dplyr::mutate(tile, </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                     geometry = geometry + 2 * (i * shift * vs1 + </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                       j * shift * vs2)))</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (type == "hexagonal") {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         vs1 = c(0, -1)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         vs2 = c(cos(-pi/6), sin(-pi/6))</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         vs3 = c(cos(pi/6), sin(pi/6))</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         for (i in 0:(n - 1)) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             for (j in 0:(n - 1)) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 for (k in 0:(n - 1)) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                   if (i == 0 &amp; j == 0 &amp;&amp; k == 0) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                     tiling &lt;- tile</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                   }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                   else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                     tiling = rbind(tiling, dplyr::mutate(tile, </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                       geometry = geometry + 2 * (i * shift * </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                         vs1 + j * shift * vs2 + k * shift * vs3)))</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                   }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                 }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     return(tiling)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;bytecode: 0x558443655c48&gt;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;environment: namespace:Kaashi&gt;</span>
+<span class='r-in'><span class='va'>tile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='motif.html'>motif</a></span><span class='op'>(</span>theta <span class='op'>=</span> <span class='fl'>60</span>, n <span class='op'>=</span> <span class='fl'>6</span>, delta <span class='op'>=</span> <span class='fl'>0.2</span>,</span>
+<span class='r-in'>                 box <span class='op'>=</span> <span class='va'>hexagonal</span>, dist <span class='op'>=</span> <span class='fl'>0.05</span>, polyLine <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tiles</span> <span class='op'>&lt;-</span> <span class='fu'>tiling</span><span class='op'>(</span><span class='va'>tile</span>,n <span class='op'>=</span> <span class='fl'>2</span>, type <span class='op'>=</span> <span class='st'>"hexagonal"</span>, box <span class='op'>=</span> <span class='va'>hexagonal</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='tilePlotter.html'>tilePlotter</a></span><span class='op'>(</span><span class='va'>tiles</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='tiling-2.png' alt='' width='700' height='433' /></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

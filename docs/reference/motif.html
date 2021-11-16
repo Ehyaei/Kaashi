@@ -178,58 +178,19 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>motif</span><span class='op'>(</span>theta <span class='op'>=</span> <span class='fl'>45</span>, delta <span class='op'>=</span> <span class='fl'>0.5</span>, polyLine <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Simple feature collection with 8 features and 1 field</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Geometry type: LINESTRING</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Dimension:     XY</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Bounding box:  xmin: -1 ymin: 0 xmax: 1 ymax: 2</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> CRS:           NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   name                   geometry</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  R01 LINESTRING (0.5 0, -1 1.5)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  R02 LINESTRING (-0.5 0, 1 1.5)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  R03 LINESTRING (1 1.5, -0.5 0)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  R04 LINESTRING (1 0.5, -0.5 2)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  R05 LINESTRING (-0.5 2, 1 0.5)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  R06 LINESTRING (0.5 2, -1 0.5)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  R07 LINESTRING (-1 0.5, 0.5 2)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  R08 LINESTRING (-1 1.5, 0.5 0)</span>
-<span class='r-in'><span class='fu'>motif</span><span class='op'>(</span>theta <span class='op'>=</span> <span class='fl'>45</span>, delta <span class='op'>=</span> <span class='fl'>0.5</span>, dist <span class='op'>=</span> <span class='fl'>0.05</span>, polyLine <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Simple feature collection with 9 features and 2 fields</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Geometry type: POLYGON</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Dimension:     XY</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Bounding box:  xmin: -1 ymin: 0 xmax: 1 ymax: 2</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> CRS:           NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   name  area                       geometry</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  R01 0.184 POLYGON ((0.4292893 0, -0.4...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  R02 0.521 POLYGON ((-0.5707107 0, -1 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  R03 0.184 POLYGON ((-1 0.5707107, -1 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  R04 0.521 POLYGON ((-1 1.570711, -1 2...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  R05 0.369 POLYGON ((2.775558e-17 1.42...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  R06 0.184 POLYGON ((-0.4292893 2, 0.4...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  R07 0.521 POLYGON ((0.5707107 2, 1 2,...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  R08 0.184 POLYGON ((1 1.429289, 1 0.5...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 9  R09 0.521 POLYGON ((1 0.4292893, 1 0,...</span>
+    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tile</span> <span class='op'>&lt;-</span> <span class='fu'>motif</span><span class='op'>(</span>theta <span class='op'>=</span> <span class='fl'>45</span>, delta <span class='op'>=</span> <span class='fl'>0.5</span>, polyLine <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='tilePlotter.html'>tilePlotter</a></span><span class='op'>(</span><span class='va'>tile</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='motif-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='va'>tile</span> <span class='op'>&lt;-</span> <span class='fu'>motif</span><span class='op'>(</span>theta <span class='op'>=</span> <span class='fl'>45</span>, delta <span class='op'>=</span> <span class='fl'>0.5</span>, dist <span class='op'>=</span> <span class='fl'>0.05</span>, polyLine <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='tilePlotter.html'>tilePlotter</a></span><span class='op'>(</span><span class='va'>tile</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='motif-2.png' alt='' width='700' height='433' /></span>
 <span class='r-in'><span class='va'>s3</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>hexagonal</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>0</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>0</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='va'>s3</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>*</span><span class='va'>s3</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>*</span><span class='va'>s3</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>,<span class='va'>s3</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-in'><span class='fu'>motif</span><span class='op'>(</span>theta <span class='op'>=</span> <span class='fl'>45</span>, n <span class='op'>=</span> <span class='fl'>6</span>, delta <span class='op'>=</span> <span class='fl'>0.2</span>, midpoint <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span>,</span>
+<span class='r-in'><span class='va'>tile</span> <span class='op'>&lt;-</span> <span class='fu'>motif</span><span class='op'>(</span>theta <span class='op'>=</span> <span class='fl'>45</span>, n <span class='op'>=</span> <span class='fl'>6</span>, delta <span class='op'>=</span> <span class='fl'>0.2</span>, midpoint <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span>,</span>
 <span class='r-in'>                box <span class='op'>=</span> <span class='va'>hexagonal</span>, drawBox <span class='op'>=</span> <span class='cn'>T</span>, polyLine <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Simple feature collection with 13 features and 1 field</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Geometry type: GEOMETRY</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Dimension:     XY</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Bounding box:  xmin: -2 ymin: 0 xmax: 2 ymax: 3.464102</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> CRS:           NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> First 10 features:</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    name                       geometry</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1   R01 LINESTRING (0.2 0, -1.82871...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2   R02 LINESTRING (-0.2 0, 1.82871...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3   R03 LINESTRING (1.6 1.03923, -1...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4   R04 LINESTRING (1.4 0.6928203, ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 5   R05 LINESTRING (1.4 2.771281, 0...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 6   R06 LINESTRING (1.6 2.424871, -...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 7   R07 LINESTRING (-0.2 3.464102, ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 8   R08 LINESTRING (0.2 3.464102, -...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   R09 LINESTRING (-1.6 2.424871, ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 10  R10 LINESTRING (-1.4 2.771281, ...</span>
+<span class='r-in'><span class='fu'><a href='tilePlotter.html'>tilePlotter</a></span><span class='op'>(</span><span class='va'>tile</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='motif-3.png' alt='' width='700' height='433' /></span>
 <span class='r-in'></span>
 </pre>
   </div>

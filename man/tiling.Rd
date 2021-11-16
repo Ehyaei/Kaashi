@@ -32,12 +32,15 @@ Tiling is function to tiling euclidean plane by tiles.
 }
 \examples{
 # Square Tiling
-tile <- pattern(theta = 45, delta = 0.5, polyLine = T)
-tiling(tile, n = 5)
+library(ggplot2)
+tile <- motif(theta = 45, delta = 0.5, polyLine = T)
+tiles <- tiling(tile, n = 5)
+tilePlotter(tiles)
 s3 = sqrt(3)
 # Hexagonal Tiling
 hexagonal = rbind(c(-1,0), c(1,0), c(2,s3), c(1,2*s3), c(-1,2*s3),c(-2,s3),c(-1,0))
-tile <- pattern(theta = 60, n = 6, delta = 0.2,
-                start_points = c(0,0), box = hexagonal, dist = 0.05, polyLine = F)
-tiling(tile,n = 2, type = "6-3", box = hexagonal)
+tile <- motif(theta = 60, n = 6, delta = 0.2,
+                 box = hexagonal, dist = 0.05, polyLine = F)
+tiles <- tiling(tile,n = 2, type = "hexagonal", box = hexagonal)
+tilePlotter(tiles)
 }

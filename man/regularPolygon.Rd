@@ -19,5 +19,5 @@ Create Regular Polygon
 }
 \examples{
 regularPolygon(5) \%>\% plot()
-regularPolygon(5,TRUE) \%>\% plot()
+regularPolygon(5,TRUE) \%>\% tilePlotter()
 }
