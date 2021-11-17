@@ -32,6 +32,7 @@ tilePlotter <- function(shape, tileColor = NULL, fill = "area", lineColor = "bla
 
   p <- ggplot(shape) +
     theme_void()+
+    coord_equal()+
     theme(legend.position = "none")
   if("area" %in% colnames(shape)){
     if(!is.null(tileColor)){
