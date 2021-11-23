@@ -7,7 +7,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.align = "center",
-  fig.width = 5
+  fig.width = 5,
+  message = FALSE,
+  warning = FALSE
 )
 ```
 

@@ -134,6 +134,8 @@
   delta <span class='op'>=</span> <span class='fl'>0.2</span>,
   n <span class='op'>=</span> <span class='fl'>4</span>,
   dist <span class='op'>=</span> <span class='fl'>0.001</span>,
+  circle <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  radius <span class='op'>=</span> <span class='cn'>NULL</span>,
   polyLine <span class='op'>=</span> <span class='cn'>F</span>,
   drawBox <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
@@ -164,6 +166,14 @@
     <tr>
       <th>dist</th>
       <td><p>is the size of interior lines.</p></td>
+    </tr>
+    <tr>
+      <th>circle</th>
+      <td><p>is a Boolean variable that makes regions based on the intersection of circles instead of lines.</p></td>
+    </tr>
+    <tr>
+      <th>radius</th>
+      <td><p>the double variable that if is not null, sets the line length or radius of the circle.</p></td>
     </tr>
     <tr>
       <th>drawBox</th>

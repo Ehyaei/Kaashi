@@ -133,6 +133,7 @@
   type <span class='op'>=</span> <span class='st'>"square"</span>,
   shift <span class='op'>=</span> <span class='cn'>NULL</span>,
   vector <span class='op'>=</span> <span class='cn'>NULL</span>,
+  overlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
   box <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
@@ -152,6 +153,10 @@ in vertical and horizontal direction tile repeated n times.</p></td>
       <th>type</th>
       <td><p>is type is tiling. you can set "square" for square tiling
 , "hexagonal" for hexagonal tiling.</p></td>
+    </tr>
+    <tr>
+      <th>overlap</th>
+      <td><p>is a Boolean variable that removes the boundary between polygons if it is TRUE.</p></td>
     </tr>
     <tr>
       <th>box</th>
