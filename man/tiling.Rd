@@ -10,6 +10,7 @@ tiling(
   type = "square",
   shift = NULL,
   vector = NULL,
+  overlap = FALSE,
   box = rbind(c(-1, -1), c(1, -1), c(1, 1), c(-1, 1), c(-1, -1))
 )
 }
@@ -21,6 +22,8 @@ in vertical and horizontal direction tile repeated n times.}
 
 \item{type}{is type is tiling. you can set "square" for square tiling
 , "hexagonal" for hexagonal tiling.}
+
+\item{overlap}{is a Boolean variable that removes the boundary between polygons if it is TRUE.}
 
 \item{box}{is boundary box that contains tile}
 }

@@ -6,6 +6,8 @@
 #' @param delta the distance of basis lines between 0 to 1 (it depend on boundary box).
 #' @param n the number of sides of polygon.
 #' @param dist is the size of interior lines.
+#' @param circle  is a Boolean variable that makes regions based on the intersection of circles instead of lines.
+#' @param radius the double variable that if is not null, sets the line length or radius of the circle.
 #' @param drawBox to show boundary box set it TRUE.
 #'
 #' @return
@@ -32,6 +34,8 @@ motif <- function(
   delta = 0.2,
   n = 4,
   dist = 0.001,
+  circle = FALSE,
+  radius = NULL,
   polyLine = F,
   drawBox = FALSE
                  ){
@@ -53,6 +57,18 @@ motif <- function(
     st_distance() %>%
     max()
 
+  if(circle){
+    d = pl_box %>%
+      st_cast('MULTIPOINT') %>%
+      st_cast('POINT') %>%
+      st_distance() %>%
+      min()
+  }
+
+  if(!is.null(radius)){
+    d = radius
+  }
+
   if(polyLine){
     ############################################################
     #                                                          #
@@ -60,17 +76,27 @@ motif <- function(
     #                                                          #
     ############################################################
 
-    # Create Basis Lines
-    ln1 <- st_linestring(rbind(
-      c(delta,0) + midpoint,
-      c(delta - d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
-    )) %>% st_sfc %>%
-      st_intersection(pl_box)
-    ln2 <- st_linestring(rbind(
-      c(-delta,0) + midpoint,
-      c(-delta + d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
-    ))%>% st_sfc %>%
-      st_intersection(pl_box)
+    if(!circle){
+      # Create Basis Lines
+      ln1 <- st_linestring(rbind(
+        c(delta,0) + midpoint,
+        c(delta - d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
+      )) %>% st_sfc %>%
+        st_intersection(pl_box)
+      ln2 <- st_linestring(rbind(
+        c(-delta,0) + midpoint,
+        c(-delta + d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
+      ))%>% st_sfc %>%
+        st_intersection(pl_box)
+    } else{
+      ln1 <- st_buffer(st_point(c(delta,0) + midpoint),d)%>% st_sfc %>%
+        st_intersection(pl_box)%>%
+        st_cast("MULTILINESTRING")
+      ln2 <- st_buffer(st_point(c(-delta,0) + midpoint),d)%>% st_sfc %>%
+        st_intersection(pl_box)%>%
+        st_cast("MULTILINESTRING")
+    }
+
 
     shapes = rbind(
       ln1 %>% st_as_sf, ln2 %>% st_as_sf)
@@ -106,15 +132,26 @@ motif <- function(
 
     # Create Basis Lines
     line_list = list()
-    ln1 <- st_linestring(rbind(
-      c(delta,0) + midpoint,
-      c(delta - d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
-    ))
+
+    if(!circle){
+      ln1 <- st_linestring(rbind(
+        c(delta,0) + midpoint,
+        c(delta - d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
+      ))
+      ln2 <- st_linestring(rbind(
+        c(-delta,0) + midpoint,
+        c(-delta + d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
+      ))
+    } else{
+      ln1 <- st_buffer(st_point(c(delta,0) + midpoint),d)%>% st_sfc %>%
+        st_intersection(pl_box)%>%
+        st_cast("MULTILINESTRING")
+      ln2 <- st_buffer(st_point(c(-delta,0) + midpoint),d)%>% st_sfc %>%
+        st_intersection(pl_box)%>%
+        st_cast("MULTILINESTRING")
+    }
+
     line_list[[1]] = ln1
-    ln2 <- st_linestring(rbind(
-      c(-delta,0) + midpoint,
-      c(-delta + d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
-    ))
     line_list[[2]] = ln2
 
     # Rotate Basis Lines

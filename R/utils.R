@@ -41,3 +41,37 @@ regularPolygon <- function(n,sf = F){
   return(polygon)
 }
 
+
+
+#' Save Pattern
+#'
+#' @param plot name of ggplot object
+#' @param path path of saving plot
+#' @param name name of file c("png","eps","svg","pdf")
+#' @param type includes subset of
+#' @param dpi Plot resolution.
+#'
+#' @return
+#' @export ggplot2
+#'
+#' @examples
+saveTile <- function(plot, path, name, type = c("png","eps","svg","pdf"), dpi = 200){
+  save_path = paste0(path,"/",name)
+
+  if("png" %in% type){
+    ggplot2::ggsave(paste0(save_path,".png"), plot = plot, dpi = dpi,  device = "png")
+    knitr::plot_crop(paste0(save_path,".png"))
+  }
+
+  if("eps" %in% type){
+    ggplot2::ggsave(paste0(save_path,".eps"), plot = plot, device = "eps")
+  }
+
+  if("svg" %in% type){
+    ggplot2::ggsave(paste0(save_path,".svg"), plot = plot, device = "svg")
+  }
+
+  if("pdf" %in% type){
+    ggplot2::ggsave(paste0(save_path,".svg"), plot = plot, device = cairo_pdf)
+  }
+}

@@ -6,6 +6,7 @@
 #' in vertical and horizontal direction tile repeated n times.
 #' @param type is type is tiling. you can set "square" for square tiling
 #' , "hexagonal" for hexagonal tiling.
+#' @param overlap is a Boolean variable that removes the boundary between polygons if it is TRUE.
 #' @param box is boundary box that contains tile
 #'
 #' @return sf object
@@ -25,11 +26,17 @@
 #'                  box = hexagonal, dist = 0.05, polyLine = F)
 #' tiles <- tiling(tile,n = 2, type = "hexagonal", box = hexagonal)
 #' tilePlotter(tiles)
-tiling <- function(tile, n, type = "square", shift = NULL, vector = NULL,
+tiling <- function(tile, n, type = "square", shift = NULL, vector = NULL, overlap = FALSE,
                    box = rbind(c(-1,-1), c(1,-1), c(1,1), c(-1,1), c(-1,-1))
                      ){
   suppressMessages(library(dplyr)) # TODO remove package
   suppressMessages(library(sf))
+
+  if(overlap){
+    ovd = 0.000001
+    } else{
+    ovd = 0
+    }
 
   pl_box = st_polygon(list(box)) %>% st_sfc()
   # Compute Center
@@ -56,7 +63,7 @@ tiling <- function(tile, n, type = "square", shift = NULL, vector = NULL,
         } else{
           tiling = rbind(
             tiling,
-            dplyr::mutate(tile,geometry = geometry + i* vector[1,] + j*vector[2,])
+            dplyr::mutate(tile,geometry = geometry + i* (vector[1,] - ovd) + j*(vector[2,] - ovd))
           )
         }
       }
@@ -73,9 +80,9 @@ tiling <- function(tile, n, type = "square", shift = NULL, vector = NULL,
   tiling <- tile
   for(i in 1:n) {
 
-    vs1 = c(0,-1)*(-1)^(i-1)
-    vs2 = c(cos(pi/6),sin(pi/6))*(-1)^(i-1)
-    vs3 = c(-cos(pi/6),sin(pi/6))*(-1)^(i-1)
+    vs1 = c(0,-1)*(-1)^(i-1) - ovd
+    vs2 = c(cos(pi/6),sin(pi/6))*(-1)^(i-1) - ovd
+    vs3 = c(-cos(pi/6),sin(pi/6))*(-1)^(i-1) - ovd
 
     reverseTile <- dplyr::mutate(tiling, geometry = (geometry-cp)*rotation(180)+cp)
 
@@ -96,8 +103,8 @@ tiling <- function(tile, n, type = "square", shift = NULL, vector = NULL,
 
   if(type == "square"){
     # Compute Center
-    vs1 = c(0,1)
-    vs2 = c(1,0)
+    vs1 = c(0,1) - ovd
+    vs2 = c(1,0) - ovd
     for(i in 0:(n-1)) {
       for(j in 0:(n-1)){
         if(i == 0 & j == 0){
@@ -120,9 +127,9 @@ tiling <- function(tile, n, type = "square", shift = NULL, vector = NULL,
 
   if(type == "hexagonal"){
     # Compute Center
-    vs1 = c(0,-1)
-    vs2 = c(cos(-pi/6),sin(-pi/6))
-    vs3 = c(cos(pi/6),sin(pi/6))
+    vs1 = c(0,-1) - ovd
+    vs2 = c(cos(-pi/6),sin(-pi/6)) - ovd
+    vs3 = c(cos(pi/6),sin(pi/6)) - ovd
 
     for(i in 0:(n-1)) {
       for(j in 0:(n-1)){

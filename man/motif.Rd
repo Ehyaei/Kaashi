@@ -11,6 +11,8 @@ motif(
   delta = 0.2,
   n = 4,
   dist = 0.001,
+  circle = FALSE,
+  radius = NULL,
   polyLine = F,
   drawBox = FALSE
 )
@@ -27,6 +29,10 @@ motif(
 \item{n}{the number of sides of polygon.}
 
 \item{dist}{is the size of interior lines.}
+
+\item{circle}{is a Boolean variable that makes regions based on the intersection of circles instead of lines.}
+
+\item{radius}{the double variable that if is not null, sets the line length or radius of the circle.}
 
 \item{drawBox}{to show boundary box set it TRUE.}
 }
