@@ -36,6 +36,12 @@ tilePlotter <- function(shape, tileColor = NULL, fill = "area", lineColor = "bla
     theme(legend.position = "none")
   if("area" %in% colnames(shape)){
     if(!is.null(tileColor)){
+      lcol = length(tileColor)
+      lfill = length(unique(shape[[fill]]))
+      if(lcol < lfill){
+        message(paste("You set",lcol , "colors, but you should choose",lfill))
+        tileColor <- c(rep(tileColor[1],lfill-lcol),tileColor)
+      }
       p = p +
         geom_sf(aes_string(fill = fill), color = borderColor, size = borderSize)+
         scale_fill_manual(values = tileColor)
