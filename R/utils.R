@@ -47,6 +47,23 @@ motif_transfer <- function(tile, shift){
   dplyr::mutate(tile, geometry = geometry + shift)
 }
 
+#' Union of two tile
+#'
+#' @param tile1 sf object
+#' @param tile2 sf object
+#'
+#' @return sf object
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' tile <- motif(polyLine = F, drawBox = T)
+#' tile_2_0 <- motif_transfer(tile, shift = c(1,0))
+#' tilePlotter(st_union(tile, tile_2_0),tileColor = c("red","yellow","blue"))
+motif_union <- function(tile1,tile2){
+  st_union(tile1,tile2)
+}
+
 #' Create Regular Polygon
 #'
 #' @param n number of sides
