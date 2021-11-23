@@ -33,6 +33,7 @@ library(Kaashi)
 library(ggplot2)
 tile <- motif(theta = 45, delta = 0.5, polyLine = T, drawBox = T)
 tilePlotter(tile)
+#> Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
 <img src="man/figures/README-tile-1.svg" width="100%" />
@@ -50,6 +51,7 @@ vector = rbind(
   c(0,2))
 tiles <- tiling(tile,n = 4, type = "periodic",vector = vector) 
 tilePlotter(tiles)
+#> Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
 <img src="man/figures/README-tiling-1.svg" width="100%" />
@@ -82,6 +84,7 @@ To plot patterns use `tilePlotter` function.
 tile <- motif(theta = 45, delta = 0.5, dist = 0.05, polyLine = F)
 tiles <- tiling(tile, n = 5)
 tilePlotter(tiles,tileColor = c("#FFAD00","#002D7B","#007EA1"),borderSize = 0.01)
+#> Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
 <img src="man/figures/README-tiling_45_0.5-1.svg" width="100%" />
@@ -102,6 +105,7 @@ Below, examples of triangle, square, and hexagonal tiling can be found.
 <img src="man/figures/hexagonal.svg"  align="center"/>
 </td>
 <td>
+<img src="man/figures/circle_45_0.2.svg"  align="center"/>
 </td>
 </tr>
 </table>

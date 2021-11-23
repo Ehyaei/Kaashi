@@ -93,6 +93,7 @@ Below, examples of triangle, square, and hexagonal tiling can be found.
   <img src="man/figures/hexagonal.svg"  align="center"/>
   </td>
   <td>
+  <img src="man/figures/circle_45_0.2.svg"  align="center"/>
   </td>
   </tr>
 </table>
