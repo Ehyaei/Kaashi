@@ -10,6 +10,43 @@ rotation <- function(theta){
   matrix(c(cos(theta*pi/180), sin(theta*pi/180), -sin(theta*pi/180), cos(theta*pi/180)), 2, 2)
 }
 
+#' Motif Rotation
+#'
+#' @param tile is sf object likes as output of motif function.
+#' @param theta the angle of rotation.
+#' @param center the center of rotation. it is 2-D vector like c(0,0).
+#'
+#' @return sf object
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' tile <- motif(polyLine = T, drawBox = T)
+#' tile_30 <- motif_rotation(tile,30,center = c(0,1))
+#' tilePlotter(tile)
+#' tilePlotter(rbind(tile,tile_30))
+motif_rotation <- function(tile, theta, center = c(0,0)){
+  dplyr::mutate(tile, geometry = (geometry-center)*rotation(theta)+center)
+}
+
+#' Motif Transfer
+#'
+#' @param tile is sf object likes as output of motif function.
+#' @param shift is 2-D shift vector like c(1,1).
+#'
+#' @return sf object
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' tile <- motif(polyLine = T, drawBox = T)
+#' tile_2_0 <- motif_transfer(tile, shift = c(2,0))
+#' tilePlotter(tile)
+#' tilePlotter(rbind(tile, tile_2_0))
+motif_transfer <- function(tile, shift){
+  dplyr::mutate(tile, geometry = geometry + shift)
+}
+
 #' Create Regular Polygon
 #'
 #' @param n number of sides
@@ -40,7 +77,6 @@ regularPolygon <- function(n,sf = F){
   }
   return(polygon)
 }
-
 
 
 #' Save Pattern
