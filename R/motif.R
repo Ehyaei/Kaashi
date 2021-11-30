@@ -9,6 +9,7 @@
 #' @param circle  is a Boolean variable that makes regions based on the intersection of circles instead of lines.
 #' @param radius the double variable that if is not null, sets the line length or radius of the circle.
 #' @param drawBox to show boundary box set it TRUE.
+#' @param cropBox the polygon that the motif is cropped by it.
 #'
 #' @return
 #' @import dplyr
@@ -37,14 +38,20 @@ motif <- function(
   circle = FALSE,
   radius = NULL,
   polyLine = F,
-  drawBox = FALSE
+  drawBox = FALSE,
+  cropBox = NULL
                  ){
 
   suppressMessages(library(dplyr)) # TODO remove package
   suppressMessages(library(sf))
 
   # Create Polygons
-  pl_box = st_polygon(list(box)) %>% st_sfc()
+  if(is.null(cropBox)){
+    pl_box = st_polygon(list(box)) %>% st_sfc()
+  } else{
+    pl_box = st_polygon(list(cropBox)) %>% st_sfc()
+  }
+
   lns_box = st_linestring(box) %>% st_sfc()
 
   # Compute Center

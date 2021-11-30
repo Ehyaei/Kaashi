@@ -14,7 +14,8 @@ motif(
   circle = FALSE,
   radius = NULL,
   polyLine = F,
-  drawBox = FALSE
+  drawBox = FALSE,
+  cropBox = NULL
 )
 }
 \arguments{
@@ -35,6 +36,8 @@ motif(
 \item{radius}{the double variable that if is not null, sets the line length or radius of the circle.}
 
 \item{drawBox}{to show boundary box set it TRUE.}
+
+\item{cropBox}{the polygon that the motif is cropped by it.}
 }
 \value{
 
