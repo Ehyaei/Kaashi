@@ -62,7 +62,7 @@ motif_transfer <- function(tile, shift){
 #' tilePlotter(tile)
 #' tilePlotter(rbind(tile, scale_tile))
 motif_scale <- function(tile, scale){
-  dplyr::mutate(tile, geometry = geometry * rep(shift,nrow(tile)))
+  dplyr::mutate(tile, geometry = geometry * rep(scale,nrow(tile)))
 }
 
 #' Union of two tile
