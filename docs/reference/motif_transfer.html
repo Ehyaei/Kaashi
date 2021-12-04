@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • Kaashi</title>
+<title>Motif Transfer — motif_transfer • Kaashi</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Motif Transfer — motif_transfer" />
+<meta property="og:description" content="Motif Transfer" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -115,102 +116,48 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Motif Transfer</h1>
+    
+    <div class="hidden name"><code>motif_transfer.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Motif Transfer</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>motif_transfer</span><span class='op'>(</span><span class='va'>tile</span>, <span class='va'>shift</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="daily_minimal_plot.html">daily_minimal_plot()</a></code> </p>
-        </td>
-        <td><p>Plot and save tile with Daily Minimal Theme</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="daily_minimal_theme.html">daily_minimal_theme()</a></code> </p>
-        </td>
-        <td><p>Daily Minimal Theme</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="motif.html">motif()</a></code> </p>
-        </td>
-        <td><p>Design Tile Pattern</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="motif_rotation.html">motif_rotation()</a></code> </p>
-        </td>
-        <td><p>Motif Rotation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="motif_transfer.html">motif_transfer()</a></code> </p>
-        </td>
-        <td><p>Motif Transfer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="motif_union.html">motif_union()</a></code> </p>
-        </td>
-        <td><p>Union of two tile</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="regularPolygon.html">regularPolygon()</a></code> </p>
-        </td>
-        <td><p>Create Regular Polygon</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rotation.html">rotation()</a></code> </p>
-        </td>
-        <td><p>Rotation function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="saveTile.html">saveTile()</a></code> </p>
-        </td>
-        <td><p>Save Pattern</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tilePlotter.html">tilePlotter()</a></code> </p>
-        </td>
-        <td><p>Plot Tile and Tiling Pattern</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tiling.html">tiling()</a></code> </p>
-        </td>
-        <td><p>Tiling of plane by Tiles</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>tile</th>
+      <td><p>is sf object likes as output of motif function.</p></td>
+    </tr>
+    <tr>
+      <th>shift</th>
+      <td><p>is 2-D shift vector like c(1,1).</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>sf object</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='motif.html'>motif</a></span><span class='op'>(</span>polyLine <span class='op'>=</span> <span class='cn'>T</span>, drawBox <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tile_2_0</span> <span class='op'>&lt;-</span> <span class='fu'>motif_transfer</span><span class='op'>(</span><span class='va'>tile</span>, shift <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='tilePlotter.html'>tilePlotter</a></span><span class='op'>(</span><span class='va'>tile</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span>
+<span class='r-plt img'><img src='motif_transfer-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'><a href='tilePlotter.html'>tilePlotter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>tile</span>, <span class='va'>tile_2_0</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Coordinate system already present. Adding new coordinate system, which will replace the existing one.</span>
+<span class='r-plt img'><img src='motif_transfer-2.png' alt='' width='700' height='433' /></span>
+</pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
