@@ -13,7 +13,8 @@
 #' @param borderColor the color of  shape's border of a class of polygon
 #'
 #' @return ggplot objects
-#' @export ggplot
+#' @import ggplot2
+#' @export
 #'
 #' @examples
 #' library(ggplot2)

@@ -10,9 +10,10 @@
 #' @param box is boundary box that contains tile
 #'
 #' @return sf object
-#' @export sf
-#' @export dplyr
+#' @import sf
+#' @import dplyr
 #'
+#' @export
 #' @examples
 #' # Square Tiling
 #' library(ggplot2)

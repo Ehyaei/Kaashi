@@ -14,7 +14,7 @@
 #' @return
 #' @import dplyr
 #' @import sf
-#' @export sf object
+#' @export
 #'
 #' @examples
 #' library(ggplot2)
