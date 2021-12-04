@@ -47,6 +47,24 @@ motif_transfer <- function(tile, shift){
   dplyr::mutate(tile, geometry = geometry + shift)
 }
 
+#' Motif Scale
+#'
+#' @param tile is sf object likes as output of motif function.
+#' @param scale numeric number that shape is scaled by it.
+#'
+#' @return sf object
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' tile <- regularPolygon(3,sf = T)
+#' scale_tile <- motif_scale(tile, 0.5)
+#' tilePlotter(tile)
+#' tilePlotter(rbind(tile, scale_tile))
+motif_scale <- function(tile, scale){
+  dplyr::mutate(tile, geometry = geometry * rep(shift,nrow(tile)))
+}
+
 #' Union of two tile
 #'
 #' @param tile1 sf object
@@ -70,6 +88,7 @@ motif_union <- function(tile1,tile2){
 #' @param sf if TRUE the sf polygon object was returned.
 #'
 #' @return matrix of points or sf polygon.
+#' @export
 #'
 #' @examples
 #' regularPolygon(5) %>% plot()
@@ -95,7 +114,6 @@ regularPolygon <- function(n,sf = F){
   return(polygon)
 }
 
-
 #' Save Pattern
 #'
 #' @param plot name of ggplot object
@@ -105,9 +123,9 @@ regularPolygon <- function(n,sf = F){
 #' @param dpi Plot resolution.
 #'
 #' @return
-#' @export ggplot2
+#' @import ggplot2
+#' @export
 #'
-#' @examples
 saveTile <- function(plot, path, name, type = c("png","eps","svg","pdf"), dpi = 200){
   save_path = paste0(path,"/",name)
 
