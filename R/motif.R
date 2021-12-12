@@ -175,12 +175,21 @@ motif <- function(
     # Last Crop
     shapes = shapes %>% st_intersection(pl_box)
 
-    sfc = st_cast(shapes,"POLYGON")
+
+    sfc = st_collection_extract(shapes,"POLYGON")
     shapes_frame <- st_sf(
       name = paste0("R",stringr::str_pad(1:length(sfc),width = 2,side = "left",pad = "0")),
       area = round(st_area(sfc),3),
       geometry = sfc
     )
+    if(nrow(shapes_frame) == 1){
+      sfc = st_cast(shapes_frame$geometry,"POLYGON")
+      shapes_frame <- st_sf(
+        name = paste0("R",stringr::str_pad(1:length(sfc),width = 2,side = "left",pad = "0")),
+        area = round(st_area(sfc),3),
+        geometry = sfc
+      )
+    }
   }
 
   return(shapes_frame)

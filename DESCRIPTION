@@ -1,7 +1,7 @@
 Package: Kaashi
 Type: Package
 Title: The Package to create Islamic Pattern
-Version: 0.1.0
+Version: 0.1.01
 Authors@R: 
     person(given = "Ahmad",
            family = "Ehyaei",
