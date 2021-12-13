@@ -76,6 +76,11 @@ motif <- function(
     d = radius
   }
 
+
+  if(length(theta) == 1){
+    theta = rep(theta,2)
+  }
+
   if(polyLine){
     ############################################################
     #                                                          #
@@ -87,12 +92,12 @@ motif <- function(
       # Create Basis Lines
       ln1 <- st_linestring(rbind(
         c(delta,0) + midpoint,
-        c(delta - d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
+        c(delta - d*cos(theta[1]*pi/180),0 + d*sin(theta[1]*pi/180)) + midpoint
       )) %>% st_sfc %>%
         st_intersection(pl_box)
       ln2 <- st_linestring(rbind(
         c(-delta,0) + midpoint,
-        c(-delta + d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
+        c(-delta + d*cos(theta[2]*pi/180),0 + d*sin(theta[2]*pi/180)) + midpoint
       ))%>% st_sfc %>%
         st_intersection(pl_box)
     } else{
@@ -143,11 +148,11 @@ motif <- function(
     if(!circle){
       ln1 <- st_linestring(rbind(
         c(delta,0) + midpoint,
-        c(delta - d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
+        c(delta - d*cos(theta[1]*pi/180),0 + d*sin(theta[1]*pi/180)) + midpoint
       ))
       ln2 <- st_linestring(rbind(
         c(-delta,0) + midpoint,
-        c(-delta + d*cos(theta*pi/180),0 + d*sin(theta*pi/180)) + midpoint
+        c(-delta + d*cos(theta[2]*pi/180),0 + d*sin(theta[2]*pi/180)) + midpoint
       ))
     } else{
       ln1 <- st_buffer(st_point(c(delta,0) + midpoint),d)%>% st_sfc %>%
